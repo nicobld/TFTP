@@ -1,7 +1,11 @@
-FILES = includes/*.h src/*.c
+OBJS=$(subst .c,.o,$(shell find . -name "*.c"))
 
-launchserver: $(FILES)
-	gcc $(FILES) -o $@
+serverTFTP: $(OBJS)
+	gcc $(OBJS) -o $@ $(CFLAGS) $(CPPFLAGS)
+
+%.o : %.c
+	gcc -c $< -o $@ $(CFLAGS) $(CPPFLAGS)
 
 clean:
-	rm launchserver
+	rm -f serverTFTP
+	rm -f $(OBJS)

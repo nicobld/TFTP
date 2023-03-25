@@ -1,0 +1,2 @@
+add fprintf to signal errors
+make the server user threads instead of fork

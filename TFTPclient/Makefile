@@ -1,7 +1,11 @@
-FILES = includes/*.h src/*.c
+OBJS=$(subst .c,.o,$(shell find . -name "*.c"))
 
-clientTFTP: $(FILES)
-	gcc $(FILES) -o $@
+clientTFTP: $(OBJS)
+	gcc $(OBJS) -o $@ $(CFLAGS) $(CPPFLAGS)
+
+%.o : %.c
+	gcc -c $< -o $@ $(CFLAGS) $(CPPFLAGS)
 
 clean:
-	rm clientTFTP
+	rm -f clientTFTP
+	rm -f $(OBJS)
